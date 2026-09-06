@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 2000 1060" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="garage-er-title garage-er-desc">
       <title id="garage-er-title">ฐานข้อมูลระบบจัดการอู่ซ่อมรถ</title>
-      <desc id="garage-er-desc">แบบจำลองข้อมูล 22 ตาราง 153 ฟิลด์ แต่ละฟิลด์ระบุชนิดข้อมูลแบบ SQL และคีย์ PK FK UQ NULL แบ่งเป็นห้ากลุ่ม ได้แก่ ข้อมูลหลักและการตั้งค่าอู่ ลูกค้าและพนักงาน งานบริการซึ่งมีตาราง Jobs เป็นศูนย์กลาง การออกบิลและโปรโมชั่น และคลังสินค้าแบบ FIFO ซึ่งมี Inventory_Lots เป็นตัวล็อกต้นทุนจริงของแต่ละรอบการรับเข้า</desc>
+      <desc id="garage-er-desc">แบบจำลองข้อมูล 22 ตาราง 151 ฟิลด์ แต่ละฟิลด์ระบุชนิดข้อมูลแบบ SQL และคีย์ PK FK UQ NULL แบ่งเป็นห้ากลุ่ม ได้แก่ ข้อมูลหลักและการตั้งค่าอู่ ลูกค้าและพนักงาน งานบริการซึ่งมีตาราง Jobs เป็นศูนย์กลาง การออกบิลและโปรโมชั่น และคลังสินค้าแบบ FIFO ซึ่งมี Inventory_Lots เป็นตัวล็อกต้นทุนจริงของแต่ละรอบการรับเข้า</desc>
       <defs>
 <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Sans+Thai:wght@400;500;600&amp;family=Noto+Serif+Thai:wght@400&amp;display=swap');</style>
         <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
@@ -10,10 +10,10 @@
       <rect width="100%" height="100%" fill="#f5f5f5"/>
 
       <!-- ZONES -->
-      <rect x="64" y="64" width="336" height="744" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+      <rect x="64" y="64" width="336" height="728" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
       <rect x="191" y="68" width="82" height="12" rx="2" fill="#f5f5f5"/>
       <text x="232" y="77" fill="rgba(45,49,66,0.40)" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">MASTER DATA</text>
-      <rect x="448" y="64" width="336" height="936" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+      <rect x="448" y="64" width="336" height="920" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
       <rect x="575" y="68" width="82" height="12" rx="2" fill="#f5f5f5"/>
       <text x="616" y="77" fill="rgba(45,49,66,0.40)" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">CRM &amp; STAFF</text>
       <rect x="832" y="64" width="336" height="776" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
@@ -112,8 +112,8 @@
       <text x="380" y="312" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
       <text x="84" y="328" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">is_active</text>
       <text x="380" y="328" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">BOOLEAN</text>
-      <rect x="72" y="384" width="320" height="184" rx="6" fill="#f5f5f5"/>
-      <rect x="72" y="384" width="320" height="184" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="72" y="384" width="320" height="168" rx="6" fill="#f5f5f5"/>
+      <rect x="72" y="384" width="320" height="168" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 72,412 V 390 Q 72,384 78,384 H 386 Q 392,384 392,390 V 412 Z" fill="rgba(45,49,66,0.05)"/>
       <line x1="72" y1="412" x2="392" y2="412" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
       <text x="84" y="403" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif">Products</text>
@@ -129,33 +129,31 @@
       <text x="380" y="488" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
       <text x="84" y="504" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">reorder_point</text>
       <text x="380" y="504" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT</text>
-      <text x="84" y="520" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">lifespan_days</text>
+      <text x="84" y="520" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">lifespan_months</text>
       <text x="380" y="520" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · NULL</text>
-      <text x="84" y="536" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">lifespan_km</text>
-      <text x="380" y="536" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · NULL</text>
-      <text x="84" y="552" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">is_active</text>
-      <text x="380" y="552" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">BOOLEAN</text>
-      <rect x="72" y="608" width="320" height="168" rx="6" fill="#f5f5f5"/>
-      <rect x="72" y="608" width="320" height="168" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
-      <path d="M 72,636 V 614 Q 72,608 78,608 H 386 Q 392,608 392,614 V 636 Z" fill="rgba(45,49,66,0.05)"/>
-      <line x1="72" y1="636" x2="392" y2="636" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
-      <text x="84" y="627" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif">Shop_Settings</text>
-      <text x="84" y="648" fill="#2d3142" font-size="9" font-weight="600" font-family="'Geist Mono', monospace">setting_id</text>
-      <text x="380" y="648" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · PK</text>
-      <text x="84" y="664" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">shop_name</text>
-      <text x="380" y="664" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">VARCHAR(150)</text>
-      <text x="84" y="680" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">shop_address</text>
-      <text x="380" y="680" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">VARCHAR(255)</text>
-      <text x="84" y="696" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">shop_phone</text>
-      <text x="380" y="696" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">VARCHAR(20)</text>
-      <text x="84" y="712" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">tax_id</text>
-      <text x="380" y="712" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">CHAR(13)</text>
-      <text x="84" y="728" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">is_vat_registered</text>
-      <text x="380" y="728" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">BOOLEAN</text>
-      <text x="84" y="744" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">vat_rate</text>
+      <text x="84" y="536" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">is_active</text>
+      <text x="380" y="536" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">BOOLEAN</text>
+      <rect x="72" y="592" width="320" height="168" rx="6" fill="#f5f5f5"/>
+      <rect x="72" y="592" width="320" height="168" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <path d="M 72,620 V 598 Q 72,592 78,592 H 386 Q 392,592 392,598 V 620 Z" fill="rgba(45,49,66,0.05)"/>
+      <line x1="72" y1="620" x2="392" y2="620" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+      <text x="84" y="611" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif">Shop_Settings</text>
+      <text x="84" y="632" fill="#2d3142" font-size="9" font-weight="600" font-family="'Geist Mono', monospace">setting_id</text>
+      <text x="380" y="632" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · PK</text>
+      <text x="84" y="648" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">shop_name</text>
+      <text x="380" y="648" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">VARCHAR(150)</text>
+      <text x="84" y="664" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">shop_address</text>
+      <text x="380" y="664" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">VARCHAR(255)</text>
+      <text x="84" y="680" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">shop_phone</text>
+      <text x="380" y="680" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">VARCHAR(20)</text>
+      <text x="84" y="696" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">tax_id</text>
+      <text x="380" y="696" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">CHAR(13)</text>
+      <text x="84" y="712" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">is_vat_registered</text>
+      <text x="380" y="712" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">BOOLEAN</text>
+      <text x="84" y="728" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">vat_rate</text>
+      <text x="380" y="728" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(5,2)</text>
+      <text x="84" y="744" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">wht_rate</text>
       <text x="380" y="744" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(5,2)</text>
-      <text x="84" y="760" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">wht_rate</text>
-      <text x="380" y="760" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(5,2)</text>
       <rect x="456" y="96" width="320" height="136" rx="6" fill="#f5f5f5"/>
       <rect x="456" y="96" width="320" height="136" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 456,124 V 102 Q 456,96 462,96 H 770 Q 776,96 776,102 V 124 Z" fill="rgba(45,49,66,0.05)"/>
@@ -220,8 +218,8 @@
       <text x="764" y="696" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">BOOLEAN</text>
       <text x="468" y="712" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">labor_share</text>
       <text x="764" y="712" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(5,2)</text>
-      <rect x="456" y="768" width="320" height="200" rx="6" fill="#f5f5f5"/>
-      <rect x="456" y="768" width="320" height="200" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="456" y="768" width="320" height="184" rx="6" fill="#f5f5f5"/>
+      <rect x="456" y="768" width="320" height="184" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 456,796 V 774 Q 456,768 462,768 H 770 Q 776,768 776,774 V 796 Z" fill="rgba(45,49,66,0.05)"/>
       <line x1="456" y1="796" x2="776" y2="796" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
       <text x="468" y="787" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif">Maintenance_Alerts</text>
@@ -235,16 +233,14 @@
       <text x="764" y="856" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK</text>
       <text x="468" y="872" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">due_date</text>
       <text x="764" y="872" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATE</text>
-      <text x="468" y="888" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">due_mileage</text>
-      <text x="764" y="888" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT</text>
-      <text x="468" y="904" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">is_contacted</text>
-      <text x="764" y="904" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">BOOLEAN</text>
-      <text x="468" y="920" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">contacted_by</text>
-      <text x="764" y="920" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK NULL</text>
-      <text x="468" y="936" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">contacted_at</text>
-      <text x="764" y="936" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME · NULL</text>
-      <text x="468" y="952" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">result</text>
-      <text x="764" y="952" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
+      <text x="468" y="888" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">is_contacted</text>
+      <text x="764" y="888" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">BOOLEAN</text>
+      <text x="468" y="904" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">contacted_by</text>
+      <text x="764" y="904" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK NULL</text>
+      <text x="468" y="920" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">contacted_at</text>
+      <text x="764" y="920" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME · NULL</text>
+      <text x="468" y="936" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">result</text>
+      <text x="764" y="936" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
       <rect x="840" y="96" width="320" height="168" rx="6" fill="#f5f5f5"/>
       <rect x="840" y="96" width="320" height="168" rx="6" fill="rgba(235,108,54,0.06)" stroke="#eb6c36" stroke-width="1"/>
       <path d="M 840,124 V 102 Q 840,96 846,96 H 1154 Q 1160,96 1160,102 V 124 Z" fill="rgba(235,108,54,0.14)"/>

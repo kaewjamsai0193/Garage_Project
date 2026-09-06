@@ -38,8 +38,7 @@
 | `type` | `ENUM('Part','Labor')` |  | แยกอะไหล่กับค่าแรงด้วยฟิลด์นี้ |
 | `selling_price` | `DECIMAL(10,2)` |  | ราคาขายมาตรฐาน เป็นราคาก่อน VAT |
 | `reorder_point` | `INT` |  | จุดสั่งซื้อ ใช้แจ้งเตือนของใกล้หมด |
-| `lifespan_days` | `INT` | NULL ได้ | อายุใช้งานเป็นวัน สำหรับคำนวณรอบเปลี่ยนถัดไป |
-| `lifespan_km` | `INT` | NULL ได้ | อายุใช้งานเป็นระยะทาง |
+| `lifespan_months` | `INT` | NULL ได้ | รอบเปลี่ยนถัดไป นับเป็นเดือน เช่น 6 คือหกเดือน 24 คือสองปี ว่างได้ถ้าอะไหล่ชิ้นนั้นไม่มีรอบเปลี่ยน |
 | `is_active` | `BOOLEAN` |  |  |
 
 ค่าแรงเก็บในตารางเดียวกับอะไหล่ แยกด้วย `type` เพราะทั้งสองอย่างขึ้นบิลเหมือนกัน ต่างกันแค่หมวดภาษีและไม่มีสต็อก
@@ -358,8 +357,7 @@ gross_profit = (part_total − discount_parts) + (labor_total − discount_labor
 | `vehicle_id` | `INT` | FK → `Vehicles` |  |
 | `job_id` | `INT` | FK → `Jobs` | งานที่เป็นต้นทางของการแจ้งเตือน |
 | `product_id` | `INT` | FK → `Products` |  |
-| `due_date` | `DATE` |  | คำนวณจาก `Products.lifespan_days` |
-| `due_mileage` | `INT` |  | คำนวณจาก `Products.lifespan_km` |
+| `due_date` | `DATE` |  | วันที่ปิดงาน บวก `Products.lifespan_months` เดือน เป็นตัวเดียวที่ใช้ยิงแจ้งเตือน |
 | `is_contacted` | `BOOLEAN` |  |  |
 | `contacted_by` | `INT` | FK → `Employees` NULL ได้ |  |
 | `contacted_at` | `DATETIME` | NULL ได้ |  |
