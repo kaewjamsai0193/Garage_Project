@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สถาปัตยกรรมระบบจัดการอู่ซ่อมรถ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+Thai:wght@400;500;600&family=Noto+Serif+Thai:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --color-accent:  #eb6c36;
+      --font-sans:     'Geist', 'Noto Sans Thai', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif Thai', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .frame { max-width: 1280px; width: 100%; }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--color-muted); margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400; letter-spacing: -0.01em; line-height: 1.25;
+      color: var(--color-ink); margin-bottom: 1.5rem;
+    }
+    svg { width: 100%; min-width: 900px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Architecture · ระบบ ERP &amp; CRM อู่ซ่อมรถ</p>
+    <h1>สถาปัตยกรรมระบบ — จากหน้าจอพนักงานถึงฐานข้อมูล FIFO</h1>
+
+    <svg viewBox="0 0 1280 740" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="garage-arch-title garage-arch-desc">
+      <title id="garage-arch-title">สถาปัตยกรรมระบบจัดการอู่ซ่อมรถ</title>
+      <desc id="garage-arch-desc">ระบบสามชั้น: หน้าจอพนักงานและแดชบอร์ดเจ้าของอู่เรียกเว็บแอปพลิเคชัน ซึ่งส่งต่อไปยังระบบงานหลักที่อ่านเขียนฐานข้อมูล MySQL ออกเอกสาร PDF ลงที่เก็บไฟล์ และมีตัวจับเวลาแจ้งเตือนรอบบำรุงรักษาทำงานทุกวัน</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+      <!-- ZONES -->
+      <rect x="80" y="72" width="1120" height="136" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+      <rect x="112" y="76" width="60" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="142" y="85" fill="rgba(45,49,66,0.40)" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">CLIENT</text>
+
+      <rect x="80" y="232" width="1120" height="256" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+      <rect x="112" y="236" width="96" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="160" y="245" fill="rgba(45,49,66,0.40)" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">APPLICATION</text>
+
+      <rect x="80" y="504" width="1120" height="136" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+      <rect x="112" y="508" width="48" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="136" y="517" fill="rgba(45,49,66,0.40)" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">DATA</text>
+
+      <!-- ARROWS -->
+      <path d="M 440,176 V 212 Q 440,220 448,220 H 592 Q 600,220 600,228 V 264" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+      <rect x="488" y="200" width="64" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="520" y="209" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">OPERATE</text>
+
+      <path d="M 840,176 V 212 Q 840,220 832,220 H 688 Q 680,220 680,228 V 264" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+      <rect x="728" y="200" width="64" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="760" y="209" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">VIEW KPI</text>
+
+      <line x1="640" y1="336" x2="640" y2="392" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+      <rect x="652" y="352" width="80" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="656" y="361" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.06em">HTTPS / JSON</text>
+
+      <line x1="360" y1="428" x2="520" y2="428" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+      <rect x="404" y="404" width="72" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="440" y="413" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">DAILY 06:00</text>
+
+      <line x1="640" y1="464" x2="640" y2="536" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+      <rect x="652" y="484" width="72" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="656" y="493" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.06em">SQL · FIFO</text>
+
+      <line x1="760" y1="428" x2="920" y2="428" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <rect x="812" y="404" width="56" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="840" y="413" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">RENDER</text>
+
+      <line x1="1020" y1="464" x2="1020" y2="536" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <rect x="1032" y="484" width="48" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="1036" y="493" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.06em">STORE</text>
+
+      <!-- NODES -->
+      <rect x="320" y="104" width="240" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="320" y="104" width="240" height="72" rx="6" fill="rgba(79,93,117,0.10)" stroke="#7a8399" stroke-width="1"/>
+      <rect x="328" y="110" width="28" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
+      <text x="342" y="119" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">UI</text>
+      <text x="440" y="144" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif" text-anchor="middle">หน้าจอพนักงาน / ช่าง</text>
+      <text x="440" y="160" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">job · quotation · stock</text>
+
+      <rect x="720" y="104" width="240" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="720" y="104" width="240" height="72" rx="6" fill="rgba(79,93,117,0.10)" stroke="#7a8399" stroke-width="1"/>
+      <rect x="728" y="110" width="28" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
+      <text x="742" y="119" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">UI</text>
+      <text x="840" y="144" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif" text-anchor="middle">แดชบอร์ดเจ้าของอู่</text>
+      <text x="840" y="160" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">profit · queue · alerts</text>
+
+      <rect x="520" y="264" width="240" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="520" y="264" width="240" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="528" y="270" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+      <text x="542" y="279" fill="rgba(45,49,66,0.80)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SPA</text>
+      <text x="640" y="304" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif" text-anchor="middle">เว็บแอปพลิเคชัน</text>
+      <text x="640" y="320" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">form · table · chart</text>
+
+      <rect x="160" y="392" width="200" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="160" y="392" width="200" height="72" rx="6" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="168" y="398" width="36" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.30)" stroke-width="0.8"/>
+      <text x="186" y="407" fill="rgba(45,49,66,0.70)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">CRON</text>
+      <text x="260" y="432" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif" text-anchor="middle">ตัวจับเวลาแจ้งเตือน</text>
+      <text x="260" y="448" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">maintenance_alerts</text>
+
+      <rect x="520" y="392" width="240" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="520" y="392" width="240" height="72" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
+      <rect x="528" y="398" width="28" height="12" rx="2" fill="transparent" stroke="rgba(235,108,54,0.40)" stroke-width="0.8"/>
+      <text x="542" y="407" fill="rgba(235,108,54,0.90)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">API</text>
+      <text x="640" y="432" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif" text-anchor="middle">ระบบงานหลัก ERP / CRM</text>
+      <text x="640" y="448" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">job · fifo · billing · promo</text>
+
+      <rect x="920" y="392" width="200" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="920" y="392" width="200" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="928" y="398" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+      <text x="942" y="407" fill="rgba(45,49,66,0.80)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SVC</text>
+      <text x="1020" y="432" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif" text-anchor="middle">ระบบออกเอกสาร PDF</text>
+      <text x="1020" y="448" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">quote · po · invoice</text>
+
+      <rect x="520" y="536" width="240" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="520" y="536" width="240" height="72" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
+      <rect x="528" y="542" width="28" height="12" rx="2" fill="transparent" stroke="rgba(235,108,54,0.40)" stroke-width="0.8"/>
+      <text x="542" y="551" fill="rgba(235,108,54,0.90)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">DB</text>
+      <text x="640" y="576" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif" text-anchor="middle">ฐานข้อมูล MySQL</text>
+      <text x="640" y="592" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">22 tables · fifo costing</text>
+
+      <rect x="920" y="536" width="200" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="920" y="536" width="200" height="72" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+      <rect x="928" y="542" width="28" height="12" rx="2" fill="transparent" stroke="rgba(79,93,117,0.40)" stroke-width="0.8"/>
+      <text x="942" y="551" fill="#4f5d75" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">FS</text>
+      <text x="1020" y="576" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif" text-anchor="middle">ที่เก็บไฟล์เอกสาร</text>
+      <text x="1020" y="592" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">pdf · image</text>
+
+      <!-- LEGEND -->
+      <line x1="80" y1="680" x2="1200" y2="680" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+      <text x="80" y="700" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">LEGEND</text>
+
+      <rect x="200" y="692" width="16" height="10" rx="2" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
+      <text x="224" y="700" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.06em">FOCAL</text>
+
+      <rect x="360" y="692" width="16" height="10" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <text x="384" y="700" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.06em">SERVICE</text>
+
+      <rect x="536" y="692" width="16" height="10" rx="2" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+      <text x="560" y="700" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.06em">STORE</text>
+
+      <rect x="700" y="692" width="16" height="10" rx="2" fill="rgba(79,93,117,0.10)" stroke="#7a8399" stroke-width="1"/>
+      <text x="724" y="700" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.06em">USER</text>
+
+      <line x1="860" y1="697" x2="884" y2="697" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="892" y="700" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.06em">SCHEDULED</text>
+
+      <line x1="1040" y1="697" x2="1064" y2="697" stroke="#2e5aa8" stroke-width="1.2"/>
+      <text x="1072" y="700" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.06em">HTTP</text>
+    </svg>
+  </div>
+</body>
+</html>
