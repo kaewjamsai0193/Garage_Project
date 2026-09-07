@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 1280 740" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="garage-arch-title garage-arch-desc">
       <title id="garage-arch-title">สถาปัตยกรรมระบบจัดการอู่ซ่อมรถ</title>
-      <desc id="garage-arch-desc">ระบบสามชั้น: หน้าจอพนักงานและแดชบอร์ดเจ้าของอู่เรียกเว็บแอปพลิเคชัน ซึ่งส่งต่อไปยังระบบงานหลักที่อ่านเขียนฐานข้อมูล MySQL ออกเอกสาร PDF ลงที่เก็บไฟล์ และมีตัวจับเวลาแจ้งเตือนรอบบำรุงรักษาทำงานทุกวัน</desc>
+      <desc id="garage-arch-desc">ระบบสามชั้น: หน้าจอพนักงานและแดชบอร์ดเจ้าของอู่เรียกเว็บแอปพลิเคชัน ซึ่งส่งต่อไปยังระบบงานหลักที่อ่านเขียนฐานข้อมูล PostgreSQL ออกเอกสาร PDF ลงที่เก็บไฟล์ และมีตัวจับเวลาแจ้งเตือนรอบบำรุงรักษาทำงานทุกวัน</desc>
       <defs>
 <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Sans+Thai:wght@400;500;600&amp;family=Noto+Serif+Thai:wght@400&amp;display=swap');</style>
         <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
@@ -100,7 +100,7 @@
       <rect x="520" y="536" width="240" height="72" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
       <rect x="528" y="542" width="28" height="12" rx="2" fill="transparent" stroke="rgba(235,108,54,0.40)" stroke-width="0.8"/>
       <text x="542" y="551" fill="rgba(235,108,54,0.90)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">DB</text>
-      <text x="640" y="576" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif" text-anchor="middle">ฐานข้อมูล MySQL</text>
+      <text x="640" y="576" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist','Noto Sans Thai',sans-serif" text-anchor="middle">ฐานข้อมูล PostgreSQL</text>
       <text x="640" y="592" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">22 tables · fifo costing</text>
 
       <rect x="920" y="536" width="200" height="72" rx="6" fill="#f5f5f5"/>

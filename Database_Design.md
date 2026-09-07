@@ -6,6 +6,22 @@
 
 ---
 
+## 0. ข้อกำหนดของฐานข้อมูล
+
+ระบบใช้ **PostgreSQL** ชนิดข้อมูลในเอกสารนี้เขียนตามแบบของ PostgreSQL ตามข้อตกลงดังนี้
+
+| ที่เขียนในตาราง | ประกาศจริงตอนสร้างตาราง |
+|---|---|
+| `INT` ที่เป็น **PK** | `INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY` |
+| `BIGINT` ที่เป็น **PK** | `BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY` |
+| `ENUM('A','B')` | `CREATE TYPE ... AS ENUM ('A','B')` แล้วใช้ชื่อ type นั้นเป็นชนิดของฟิลด์ เช่น `job_status`, `product_type`, `payment_method` |
+| `NUMERIC(p,s)` | ชนิดทศนิยมความละเอียดคงที่ ใช้กับเงินและจำนวนทุกช่อง ไม่ใช้ `FLOAT` เพราะปัดเศษเพี้ยน |
+| `TIMESTAMPTZ` | เก็บพร้อม time zone ตั้งค่าฐานข้อมูลเป็น `Asia/Bangkok` |
+
+ที่เลือก PostgreSQL เพราะระบบนี้พึ่ง partial unique index อยู่สองที่ คือกันไม่ให้รถหนึ่งคันมีใบงานเปิดค้างสองใบ และกันไม่ให้ใบงานหนึ่งใบมีช่างหลักเกินหนึ่งคน สองข้อนี้ PostgreSQL บังคับได้ที่ชั้นฐานข้อมูลเลย ไม่ต้องฝากไว้กับโค้ด
+
+---
+
 ## 1. ข้อมูลหลัก
 
 ### `Vehicle_Brands` — ยี่ห้อรถ
@@ -36,7 +52,7 @@
 | `code` | `VARCHAR(30)` | UNIQUE | รหัสสินค้า / SKU |
 | `name` | `VARCHAR(150)` |  | ชื่อรายการ |
 | `type` | `ENUM('Part','Labor')` |  | แยกอะไหล่กับค่าแรงด้วยฟิลด์นี้ |
-| `selling_price` | `DECIMAL(10,2)` |  | ราคาขายมาตรฐาน เป็นราคาก่อน VAT |
+| `selling_price` | `NUMERIC(10,2)` |  | ราคาขายมาตรฐาน เป็นราคาก่อน VAT |
 | `reorder_point` | `INT` |  | จุดสั่งซื้อ ใช้แจ้งเตือนของใกล้หมด |
 | `lifespan_months` | `INT` | NULL ได้ | รอบเปลี่ยนถัดไป นับเป็นเดือน เช่น 6 คือหกเดือน 24 คือสองปี ว่างได้ถ้าอะไหล่ชิ้นนั้นไม่มีรอบเปลี่ยน |
 | `is_active` | `BOOLEAN` |  |  |
@@ -75,8 +91,8 @@
 | `shop_phone` | `VARCHAR(20)` |  |  |
 | `tax_id` | `CHAR(13)` |  | เลขประจำตัวผู้เสียภาษีของอู่ |
 | `is_vat_registered` | `BOOLEAN` |  | อู่จดทะเบียน VAT แล้วหรือยัง |
-| `vat_rate` | `DECIMAL(5,2)` |  | ค่าเริ่มต้น 7.00 |
-| `wht_rate` | `DECIMAL(5,2)` |  | ค่าเริ่มต้น 3.00 |
+| `vat_rate` | `NUMERIC(5,2)` |  | ค่าเริ่มต้น 7.00 |
+| `wht_rate` | `NUMERIC(5,2)` |  | ค่าเริ่มต้น 3.00 |
 
 เมื่อ `is_vat_registered` เป็นเท็จ ระบบจะไม่คิด VAT บังคับ `vat_amount` เป็นศูนย์ และเปลี่ยนหัวเอกสารจากใบกำกับภาษีเป็นใบเสร็จรับเงินธรรมดา
 
@@ -93,7 +109,7 @@
 | `name` | `VARCHAR(100)` |  |  |
 | `is_corporate` | `BOOLEAN` |  | นิติบุคคลหรือไม่ ใช้ตัดสินว่าต้องหักภาษี ณ ที่จ่ายไหม |
 | `tax_id` | `CHAR(13)` | NULL ได้ | เลขผู้เสียภาษี กรณีเป็นนิติบุคคล |
-| `created_at` | `DATETIME` |  |  |
+| `created_at` | `TIMESTAMPTZ` |  |  |
 
 ### `Vehicles`
 
@@ -119,8 +135,8 @@
 | `mileage_in` | `INT` |  | เลขไมล์ตอนรับรถ |
 | `symptom_note` | `TEXT` |  | อาการเสียเบื้องต้น |
 | `status` | `ENUM('Queue','Fixing','Waiting_Part','Done','Closed','Cancelled')` |  | `Done` คือซ่อมเสร็จรอส่งมอบ `Closed` คือเก็บเงินและส่งมอบแล้ว |
-| `created_at` | `DATETIME` |  |  |
-| `closed_at` | `DATETIME` | NULL ได้ |  |
+| `created_at` | `TIMESTAMPTZ` |  |  |
+| `closed_at` | `TIMESTAMPTZ` | NULL ได้ |  |
 
 `Done` คือซ่อมเสร็จรอส่งมอบ `Closed` คือเก็บเงินและส่งมอบแล้ว ต้องแยกกันเพราะแดชบอร์ดนับสองอย่างนี้คนละช่อง
 
@@ -131,19 +147,41 @@ CREATE UNIQUE INDEX uq_vehicle_open_job ON Jobs (vehicle_id)
   WHERE status NOT IN ('Closed', 'Cancelled');
 ```
 
-MySQL ไม่รองรับ partial index ให้ย้ายไปเช็คในชั้น application แทน
+PostgreSQL รองรับ partial index จึงบังคับกฎนี้ได้ที่ฐานข้อมูลโดยตรง ไม่ต้องเขียนเช็คซ้ำในโค้ด
 
 ### `Job_Mechanics` — ช่างที่รับผิดชอบใบงาน
+
+ตารางเชื่อมระหว่าง `Jobs` กับ `Employees` ความสัมพันธ์เป็นแบบหลายต่อหลาย ใบงานหนึ่งใบมีช่างได้หลายคน และช่างหนึ่งคนก็รับหลายใบงานได้ งานใหญ่ที่ช่างสามสี่คนลงมือด้วยกันจึงบันทึกได้ครบทุกคน ไม่ต้องเลือกว่าจะลงชื่อใคร
 
 | ฟิลด์ | ชนิดข้อมูล | คีย์ | รายละเอียด |
 |---|---|---|---|
 | `job_mechanic_id` | `INT` | **PK** |  |
 | `job_id` | `INT` | FK → `Jobs` |  |
-| `employee_id` | `INT` | FK → `Employees` |  |
+| `employee_id` | `INT` | FK → `Employees` | ต้องเป็นพนักงานที่ `role` เป็น `Mechanic` |
 | `is_lead` | `BOOLEAN` |  | ช่างหลักของใบงาน มีได้คนเดียว |
-| `labor_share` | `DECIMAL(5,2)` |  | สัดส่วนค่าแรงที่รับผิดชอบ หน่วยเป็นเปอร์เซ็นต์ |
+| `labor_share` | `NUMERIC(5,2)` | NULL ได้ | สัดส่วนค่าแรงที่รับผิดชอบ หน่วยเป็นเปอร์เซ็นต์ ว่างได้ ว่างคือหารเท่ากัน |
 
-ตอนบันทึกต้องตรวจว่าผลรวม `labor_share` ของใบงานเท่ากับ 100 และมี `is_lead` เป็นจริงแค่แถวเดียว
+```sql
+-- ช่างคนเดิมห้ามซ้ำในใบงานเดียวกัน
+ALTER TABLE Job_Mechanics
+  ADD CONSTRAINT uq_job_mechanic UNIQUE (job_id, employee_id);
+
+-- ช่างหลักมีได้ใบงานละคนเดียว แต่ช่างร่วมมีได้ไม่จำกัด
+CREATE UNIQUE INDEX uq_job_lead ON Job_Mechanics (job_id) WHERE is_lead;
+
+-- สัดส่วนค่าแรงจะว่างก็ได้ ถ้ากรอกต้องมากกว่าศูนย์และไม่เกินร้อย
+ALTER TABLE Job_Mechanics
+  ADD CONSTRAINT ck_labor_share
+  CHECK (labor_share IS NULL OR (labor_share > 0 AND labor_share <= 100));
+```
+
+**`labor_share` ไม่ต้องกรอกก็ได้** งานปกติเลือกแค่ชื่อช่าง ปล่อยช่องนี้ว่างไว้ ตอนออกรายงานผลงานช่างระบบจะหารค่าแรงเท่ากันตามจำนวนช่างในใบงานนั้น ช่างสองคนก็คนละครึ่ง สามคนก็คนละหนึ่งในสาม
+
+จะกรอกก็ต่อเมื่ออยากถ่วงน้ำหนักจริง ๆ เช่นงานใหญ่ที่ช่างหลักลงแรง 60 ช่างร่วมอีกสองคนคนละ 20 กรณีนี้ต้องกรอกให้ครบทุกแถวของใบงานและผลรวมเท่ากับ 100 เป็นกฎข้ามแถวที่ constraint ธรรมดาบังคับไม่ได้ ให้ตรวจตอนกดปิดใบงาน
+
+ที่ยอมให้ว่างได้เพราะการบังคับกรอกเปอร์เซ็นต์ทุกใบงานคือภาระที่ไม่มีใครทำจริง สุดท้ายจะได้ 50/50 มั่ว ๆ ติดมาทุกใบ แล้วถ้าวันหลังเพิ่มช่างคนที่สามเข้าใบงานเดิม ตัวเลขที่กรอกไว้จะค้างผิดทันที ค่าว่างจึงปลอดภัยกว่า เพราะคำนวณสดจากจำนวนช่างที่มีอยู่ ณ ตอนนั้นเสมอ
+
+ไม่ว่าจะกรอกหรือไม่กรอก ค่าแรงของใบงานหนึ่งใบต้องถูกหารให้ช่างเสมอ ห้ามนับเต็มก้อนให้ทุกคนที่แตะงานนั้น ไม่งั้นงานค่าแรงสามพันที่ช่างสามคนช่วยกัน จะกลายเป็นเก้าพันในรายงานผลงานช่าง
 
 ### `Quotations` — ใบเสนอราคา
 
@@ -154,8 +192,8 @@ MySQL ไม่รองรับ partial index ให้ย้ายไปเ�
 | `version` | `INT` |  | v1, v2, ... |
 | `status` | `ENUM('Draft','Approved','Rejected')` |  |  |
 | `approved_by` | `INT` | FK → `Employees` NULL ได้ | ว่างได้ถ้ายังไม่อนุมัติ |
-| `approved_at` | `DATETIME` | NULL ได้ |  |
-| `created_at` | `DATETIME` |  |  |
+| `approved_at` | `TIMESTAMPTZ` | NULL ได้ |  |
+| `created_at` | `TIMESTAMPTZ` |  |  |
 
 ยอดรวมและ VAT ไม่ได้เก็บไว้ในตารางนี้ แต่คำนวณสดจาก `Quotation_Items` ตอนสร้าง PDF เพราะราคาต่อหน่วยถูกล็อกไว้ในรายการอยู่แล้ว เก็บยอดรวมซ้ำอีกที่มีแต่จะเสี่ยงตัวเลขไม่ตรงกัน
 
@@ -166,8 +204,8 @@ MySQL ไม่รองรับ partial index ให้ย้ายไปเ�
 | `quote_item_id` | `INT` | **PK** |  |
 | `quotation_id` | `INT` | FK → `Quotations` |  |
 | `product_id` | `INT` | FK → `Products` |  |
-| `qty` | `DECIMAL(10,2)` |  |  |
-| `unit_price` | `DECIMAL(10,2)` |  | ราคาต่อหน่วย ณ วันเสนอ ก่อน VAT |
+| `qty` | `NUMERIC(10,2)` |  |  |
+| `unit_price` | `NUMERIC(10,2)` |  | ราคาต่อหน่วย ณ วันเสนอ ก่อน VAT |
 
 `unit_price` เป็นสำเนาของราคา ณ ตอนนั้น ไม่ใช่การอ้างอิงไปที่ `Products.selling_price` ราคากลางจะเปลี่ยนทีหลังก็ไม่กระทบใบที่เสนอไปแล้ว
 
@@ -179,9 +217,9 @@ MySQL ไม่รองรับ partial index ให้ย้ายไปเ�
 | `job_id` | `INT` | FK → `Jobs` |  |
 | `product_id` | `INT` | FK → `Products` |  |
 | `lot_id` | `INT` | FK → `Inventory_Lots` NULL ได้ | ว่างได้ เพราะค่าแรงไม่มี Lot |
-| `qty` | `DECIMAL(10,2)` |  |  |
-| `selling_price` | `DECIMAL(10,2)` |  | ราคาที่ตกลงกับลูกค้า ก่อน VAT |
-| `actual_cost` | `DECIMAL(10,2)` |  | ต้นทุนจริงต่อหน่วย ดึงมาจาก Lot ที่ตัด |
+| `qty` | `NUMERIC(10,2)` |  |  |
+| `selling_price` | `NUMERIC(10,2)` |  | ราคาที่ตกลงกับลูกค้า ก่อน VAT |
+| `actual_cost` | `NUMERIC(10,2)` |  | ต้นทุนจริงต่อหน่วย ดึงมาจาก Lot ที่ตัด |
 
 **การตัดข้าม Lot** ถ้าอะไหล่ตัวเดียวต้องตัดจากหลาย Lot เช่นต้องการ 10 ชิ้นแต่ Lot เก่าเหลือ 6 ต้องเอาจาก Lot ถัดไปอีก 4 ให้แตกเป็นสองแถว แถวละ Lot เพราะแต่ละ Lot มีต้นทุนไม่เท่ากัน ถ้ายัดใน 1 แถว `actual_cost` จะเก็บได้ค่าเดียวและกำไรจะผิด
 
@@ -208,9 +246,9 @@ MySQL ไม่รองรับ partial index ให้ย้ายไปเ�
 | `po_item_id` | `INT` | **PK** |  |
 | `po_id` | `INT` | FK → `Purchase_Orders` |  |
 | `product_id` | `INT` | FK → `Products` |  |
-| `qty` | `DECIMAL(10,2)` |  | จำนวนที่สั่ง |
-| `received_qty` | `DECIMAL(10,2)` |  | จำนวนที่รับมาแล้วจริง |
-| `cost_price` | `DECIMAL(10,2)` |  | ต้นทุนต่อชิ้นที่ตกลงกับร้าน |
+| `qty` | `NUMERIC(10,2)` |  | จำนวนที่สั่ง |
+| `received_qty` | `NUMERIC(10,2)` |  | จำนวนที่รับมาแล้วจริง |
+| `cost_price` | `NUMERIC(10,2)` |  | ต้นทุนต่อชิ้นที่ตกลงกับร้าน |
 
 รับของไม่ครบให้กดรับเท่าที่มา ระบบสร้าง Lot ของจำนวนนั้นและตั้งใบสั่งซื้อเป็น `Partial` ของที่ตามมาทีหลังจะสร้าง Lot ใหม่แยก เพราะอาจได้ต้นทุนคนละราคา
 
@@ -222,10 +260,10 @@ MySQL ไม่รองรับ partial index ให้ย้ายไปเ�
 | `product_id` | `INT` | FK → `Products` |  |
 | `po_id` | `INT` | FK → `Purchase_Orders` NULL ได้ | ว่างได้กรณีซื้อด่วน |
 | `supplier_id` | `INT` | FK → `Suppliers` NULL ได้ | ว่างได้ แต่จำเป็นเพราะซื้อด่วนไม่มีใบสั่งซื้อ |
-| `receive_date` | `DATETIME` |  | วันที่ของเข้า ใช้เรียงคิว FIFO |
-| `unit_cost` | `DECIMAL(10,2)` |  | ต้นทุนต่อชิ้นของรอบนี้ |
-| `initial_qty` | `DECIMAL(10,2)` |  | จำนวนที่รับเข้า |
-| `remaining_qty` | `DECIMAL(10,2)` |  | จำนวนที่เหลือให้ตัด |
+| `receive_date` | `TIMESTAMPTZ` |  | วันที่ของเข้า ใช้เรียงคิว FIFO |
+| `unit_cost` | `NUMERIC(10,2)` |  | ต้นทุนต่อชิ้นของรอบนี้ |
+| `initial_qty` | `NUMERIC(10,2)` |  | จำนวนที่รับเข้า |
+| `remaining_qty` | `NUMERIC(10,2)` |  | จำนวนที่เหลือให้ตัด |
 
 `supplier_id` จำเป็นเพราะการซื้อด่วนไม่มีใบสั่งซื้อ ถ้าไม่มีฟิลด์นี้จะไม่รู้ว่าของล็อตนั้นซื้อมาจากร้านไหน
 
@@ -237,10 +275,10 @@ MySQL ไม่รองรับ partial index ให้ย้ายไปเ�
 | `product_id` | `INT` | FK → `Products` |  |
 | `lot_id` | `INT` | FK → `Inventory_Lots` |  |
 | `job_id` | `INT` | FK → `Jobs` NULL ได้ | ว่างได้กรณีเป็นการรับของเข้า |
-| `qty` | `DECIMAL(10,2)` |  | บวกคือรับเข้าหรือคืนสต็อก ลบคือเบิกใช้ |
+| `qty` | `NUMERIC(10,2)` |  | บวกคือรับเข้าหรือคืนสต็อก ลบคือเบิกใช้ |
 | `type` | `ENUM('Receive','Consume','Rollback','Adjust')` |  |  |
 | `note` | `VARCHAR(255)` | NULL ได้ | บังคับกรอกเมื่อ `type` เป็น `Adjust` |
-| `created_at` | `DATETIME` |  |  |
+| `created_at` | `TIMESTAMPTZ` |  |  |
 | `created_by` | `INT` | FK → `Employees` |  |
 
 `Rollback` ใช้ตอนคืนของที่จองไว้กลับเข้าสต็อกเมื่อลูกค้าไม่อนุมัติ ส่วน `Adjust` ใช้ตอนนับสต็อกแล้วของจริงไม่ตรงกับระบบ
@@ -259,7 +297,7 @@ MySQL ไม่รองรับ partial index ให้ย้ายไปเ�
 | `code` | `VARCHAR(30)` | UNIQUE | เช่น RAINY26 |
 | `name` | `VARCHAR(150)` |  |  |
 | `discount_type` | `ENUM('Percent','Fixed_Amount')` |  |  |
-| `discount_value` | `DECIMAL(10,2)` |  |  |
+| `discount_value` | `NUMERIC(10,2)` |  |  |
 | `scope` | `ENUM('All','Part','Labor')` |  | จำเป็นสำหรับแคมเปญแบบฟรีค่าแรง |
 | `start_date` | `DATE` |  |  |
 | `end_date` | `DATE` |  |  |
@@ -274,18 +312,18 @@ MySQL ไม่รองรับ partial index ให้ย้ายไปเ�
 | `invoice_id` | `INT` | **PK** |  |
 | `job_id` | `INT` | FK → `Jobs` UNIQUE | หนึ่งใบงานออกได้หนึ่งบิล |
 | `promotion_id` | `INT` | FK → `Promotions` NULL ได้ | หนึ่งบิลใช้ได้หนึ่งโปร |
-| `part_total` | `DECIMAL(12,2)` |  | ยอดอะไหล่ก่อนหักส่วนลด ก่อน VAT |
-| `labor_total` | `DECIMAL(12,2)` |  | ยอดค่าแรงก่อนหักส่วนลด |
-| `discount_parts` | `DECIMAL(12,2)` |  | ส่วนลดที่ตกกับหมวดอะไหล่ |
-| `discount_labor` | `DECIMAL(12,2)` |  | ส่วนลดที่ตกกับหมวดค่าแรง |
-| `vat_rate` | `DECIMAL(5,2)` |  | อัตรา VAT ณ วันออกบิล |
-| `vat_amount` | `DECIMAL(12,2)` |  |  |
-| `wht_rate` | `DECIMAL(5,2)` |  | อัตราหัก ณ ที่จ่าย ณ วันออกบิล |
-| `wht_amount` | `DECIMAL(12,2)` |  |  |
-| `net_total` | `DECIMAL(12,2)` |  | ยอดที่ลูกค้าจ่ายจริง |
-| `gross_profit` | `DECIMAL(12,2)` |  | กำไรขั้นต้นของบิลนี้ |
+| `part_total` | `NUMERIC(12,2)` |  | ยอดอะไหล่ก่อนหักส่วนลด ก่อน VAT |
+| `labor_total` | `NUMERIC(12,2)` |  | ยอดค่าแรงก่อนหักส่วนลด |
+| `discount_parts` | `NUMERIC(12,2)` |  | ส่วนลดที่ตกกับหมวดอะไหล่ |
+| `discount_labor` | `NUMERIC(12,2)` |  | ส่วนลดที่ตกกับหมวดค่าแรง |
+| `vat_rate` | `NUMERIC(5,2)` |  | อัตรา VAT ณ วันออกบิล |
+| `vat_amount` | `NUMERIC(12,2)` |  |  |
+| `wht_rate` | `NUMERIC(5,2)` |  | อัตราหัก ณ ที่จ่าย ณ วันออกบิล |
+| `wht_amount` | `NUMERIC(12,2)` |  |  |
+| `net_total` | `NUMERIC(12,2)` |  | ยอดที่ลูกค้าจ่ายจริง |
+| `gross_profit` | `NUMERIC(12,2)` |  | กำไรขั้นต้นของบิลนี้ |
 | `status` | `ENUM('Unpaid','Partial','Paid')` |  |  |
-| `issue_date` | `DATETIME` |  |  |
+| `issue_date` | `TIMESTAMPTZ` |  |  |
 
 **การปันส่วนลด** กรณี `scope` เป็น `All`
 
@@ -325,8 +363,8 @@ gross_profit = (part_total − discount_parts) + (labor_total − discount_labor
 | `payment_id` | `INT` | **PK** |  |
 | `invoice_id` | `INT` | FK → `Invoices` |  |
 | `method` | `ENUM('Cash','Transfer','Card')` |  |  |
-| `amount` | `DECIMAL(12,2)` |  |  |
-| `paid_at` | `DATETIME` |  |  |
+| `amount` | `NUMERIC(12,2)` |  |  |
+| `paid_at` | `TIMESTAMPTZ` |  |  |
 | `received_by` | `INT` | FK → `Employees` |  |
 
 หนึ่งบิลมีได้หลายรายการจ่าย รองรับการจ่ายแบ่งงวด
@@ -340,8 +378,8 @@ gross_profit = (part_total − discount_parts) + (labor_total − discount_labor
 | `po_id` | `INT` | FK → `Purchase_Orders` NULL ได้ | ว่างได้ |
 | `lot_id` | `INT` | FK → `Inventory_Lots` NULL ได้ | ใช้แทน `po_id` กรณีซื้อด่วน |
 | `method` | `ENUM('Cash','Transfer','Petty_Cash')` |  | `Petty_Cash` คือการตัดเงินสดย่อยของอู่ |
-| `amount` | `DECIMAL(12,2)` |  |  |
-| `paid_at` | `DATETIME` |  |  |
+| `amount` | `NUMERIC(12,2)` |  |  |
+| `paid_at` | `TIMESTAMPTZ` |  |  |
 
 `Petty_Cash` คือการตัดเงินสดย่อยของอู่ ใช้ตอนช่างวิ่งไปซื้อของด่วนแล้วควักเงินไปก่อน
 
@@ -360,7 +398,7 @@ gross_profit = (part_total − discount_parts) + (labor_total − discount_labor
 | `due_date` | `DATE` |  | วันที่ปิดงาน บวก `Products.lifespan_months` เดือน เป็นตัวเดียวที่ใช้ยิงแจ้งเตือน |
 | `is_contacted` | `BOOLEAN` |  |  |
 | `contacted_by` | `INT` | FK → `Employees` NULL ได้ |  |
-| `contacted_at` | `DATETIME` | NULL ได้ |  |
+| `contacted_at` | `TIMESTAMPTZ` | NULL ได้ |  |
 | `result` | `ENUM('Pending','Booked','Declined','No_Answer')` |  | ใช้วัด KPI ของพนักงานหน้าร้าน |
 
 `result` ใช้วัด KPI ของพนักงานหน้าร้านว่าโทรตามลูกค้าแล้วได้ผลแค่ไหน

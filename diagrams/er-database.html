@@ -74,7 +74,7 @@
 </head>
 <body>
   <div class="frame">
-    <p class="eyebrow">ER / Data Model &middot; 22 entities &middot; 151 fields</p>
+    <p class="eyebrow">ER / Data Model &middot; PostgreSQL &middot; 22 entities &middot; 151 fields</p>
     <h1>ฐานข้อมูลระบบจัดการอู่ซ่อมรถ</h1>
     <p class="lede">
       ยี่สิบสองตารางแบ่งเป็นห้ากลุ่มตามหน้าที่ ทุกกล่องแสดงชื่อฟิลด์ ชนิดข้อมูล และคีย์ครบทุกฟิลด์
@@ -210,7 +210,7 @@
       <text x="84" y="472" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">type</text>
       <text x="380" y="472" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
       <text x="84" y="488" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">selling_price</text>
-      <text x="380" y="488" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="380" y="488" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <text x="84" y="504" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">reorder_point</text>
       <text x="380" y="504" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT</text>
       <text x="84" y="520" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">lifespan_months</text>
@@ -235,9 +235,9 @@
       <text x="84" y="712" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">is_vat_registered</text>
       <text x="380" y="712" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">BOOLEAN</text>
       <text x="84" y="728" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">vat_rate</text>
-      <text x="380" y="728" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(5,2)</text>
+      <text x="380" y="728" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(5,2)</text>
       <text x="84" y="744" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">wht_rate</text>
-      <text x="380" y="744" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(5,2)</text>
+      <text x="380" y="744" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(5,2)</text>
       <rect x="456" y="96" width="320" height="136" rx="6" fill="#f5f5f5"/>
       <rect x="456" y="96" width="320" height="136" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 456,124 V 102 Q 456,96 462,96 H 770 Q 776,96 776,102 V 124 Z" fill="rgba(45,49,66,0.05)"/>
@@ -254,7 +254,7 @@
       <text x="468" y="200" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">tax_id</text>
       <text x="764" y="200" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">CHAR(13) · NULL</text>
       <text x="468" y="216" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">created_at</text>
-      <text x="764" y="216" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME</text>
+      <text x="764" y="216" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">TIMESTAMPTZ</text>
       <rect x="456" y="272" width="320" height="120" rx="6" fill="#f5f5f5"/>
       <rect x="456" y="272" width="320" height="120" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 456,300 V 278 Q 456,272 462,272 H 770 Q 776,272 776,278 V 300 Z" fill="rgba(45,49,66,0.05)"/>
@@ -301,7 +301,7 @@
       <text x="468" y="696" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">is_lead</text>
       <text x="764" y="696" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">BOOLEAN</text>
       <text x="468" y="712" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">labor_share</text>
-      <text x="764" y="712" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(5,2)</text>
+      <text x="764" y="712" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(5,2) · NULL</text>
       <rect x="456" y="768" width="320" height="184" rx="6" fill="#f5f5f5"/>
       <rect x="456" y="768" width="320" height="184" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 456,796 V 774 Q 456,768 462,768 H 770 Q 776,768 776,774 V 796 Z" fill="rgba(45,49,66,0.05)"/>
@@ -322,7 +322,7 @@
       <text x="468" y="904" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">contacted_by</text>
       <text x="764" y="904" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK NULL</text>
       <text x="468" y="920" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">contacted_at</text>
-      <text x="764" y="920" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME · NULL</text>
+      <text x="764" y="920" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">TIMESTAMPTZ · NULL</text>
       <text x="468" y="936" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">result</text>
       <text x="764" y="936" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
       <rect x="840" y="96" width="320" height="168" rx="6" fill="#f5f5f5"/>
@@ -343,9 +343,9 @@
       <text x="852" y="216" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">status</text>
       <text x="1148" y="216" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
       <text x="852" y="232" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">created_at</text>
-      <text x="1148" y="232" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME</text>
+      <text x="1148" y="232" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">TIMESTAMPTZ</text>
       <text x="852" y="248" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">closed_at</text>
-      <text x="1148" y="248" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME · NULL</text>
+      <text x="1148" y="248" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">TIMESTAMPTZ · NULL</text>
       <rect x="840" y="304" width="320" height="152" rx="6" fill="#f5f5f5"/>
       <rect x="840" y="304" width="320" height="152" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 840,332 V 310 Q 840,304 846,304 H 1154 Q 1160,304 1160,310 V 332 Z" fill="rgba(45,49,66,0.05)"/>
@@ -362,9 +362,9 @@
       <text x="852" y="408" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">approved_by</text>
       <text x="1148" y="408" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK NULL</text>
       <text x="852" y="424" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">approved_at</text>
-      <text x="1148" y="424" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME · NULL</text>
+      <text x="1148" y="424" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">TIMESTAMPTZ · NULL</text>
       <text x="852" y="440" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">created_at</text>
-      <text x="1148" y="440" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME</text>
+      <text x="1148" y="440" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">TIMESTAMPTZ</text>
       <rect x="840" y="496" width="320" height="120" rx="6" fill="#f5f5f5"/>
       <rect x="840" y="496" width="320" height="120" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 840,524 V 502 Q 840,496 846,496 H 1154 Q 1160,496 1160,502 V 524 Z" fill="rgba(45,49,66,0.05)"/>
@@ -377,9 +377,9 @@
       <text x="852" y="568" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">product_id</text>
       <text x="1148" y="568" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK</text>
       <text x="852" y="584" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">qty</text>
-      <text x="1148" y="584" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1148" y="584" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <text x="852" y="600" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">unit_price</text>
-      <text x="1148" y="600" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1148" y="600" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <rect x="840" y="656" width="320" height="152" rx="6" fill="#f5f5f5"/>
       <rect x="840" y="656" width="320" height="152" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 840,684 V 662 Q 840,656 846,656 H 1154 Q 1160,656 1160,662 V 684 Z" fill="rgba(45,49,66,0.05)"/>
@@ -394,11 +394,11 @@
       <text x="852" y="744" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">lot_id</text>
       <text x="1148" y="744" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK NULL</text>
       <text x="852" y="760" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">qty</text>
-      <text x="1148" y="760" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1148" y="760" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <text x="852" y="776" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">selling_price</text>
-      <text x="1148" y="776" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1148" y="776" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <text x="852" y="792" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">actual_cost</text>
-      <text x="1148" y="792" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1148" y="792" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <rect x="1224" y="96" width="320" height="184" rx="6" fill="#f5f5f5"/>
       <rect x="1224" y="96" width="320" height="184" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 1224,124 V 102 Q 1224,96 1230,96 H 1538 Q 1544,96 1544,102 V 124 Z" fill="rgba(45,49,66,0.05)"/>
@@ -413,7 +413,7 @@
       <text x="1236" y="184" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">discount_type</text>
       <text x="1532" y="184" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
       <text x="1236" y="200" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">discount_value</text>
-      <text x="1532" y="200" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1532" y="200" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <text x="1236" y="216" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">scope</text>
       <text x="1532" y="216" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
       <text x="1236" y="232" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">start_date</text>
@@ -434,29 +434,29 @@
       <text x="1236" y="392" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">promotion_id</text>
       <text x="1532" y="392" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK NULL</text>
       <text x="1236" y="408" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">part_total</text>
-      <text x="1532" y="408" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(12,2)</text>
+      <text x="1532" y="408" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(12,2)</text>
       <text x="1236" y="424" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">labor_total</text>
-      <text x="1532" y="424" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(12,2)</text>
+      <text x="1532" y="424" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(12,2)</text>
       <text x="1236" y="440" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">discount_parts</text>
-      <text x="1532" y="440" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(12,2)</text>
+      <text x="1532" y="440" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(12,2)</text>
       <text x="1236" y="456" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">discount_labor</text>
-      <text x="1532" y="456" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(12,2)</text>
+      <text x="1532" y="456" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(12,2)</text>
       <text x="1236" y="472" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">vat_rate</text>
-      <text x="1532" y="472" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(5,2)</text>
+      <text x="1532" y="472" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(5,2)</text>
       <text x="1236" y="488" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">vat_amount</text>
-      <text x="1532" y="488" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(12,2)</text>
+      <text x="1532" y="488" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(12,2)</text>
       <text x="1236" y="504" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">wht_rate</text>
-      <text x="1532" y="504" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(5,2)</text>
+      <text x="1532" y="504" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(5,2)</text>
       <text x="1236" y="520" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">wht_amount</text>
-      <text x="1532" y="520" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(12,2)</text>
+      <text x="1532" y="520" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(12,2)</text>
       <text x="1236" y="536" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">net_total</text>
-      <text x="1532" y="536" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(12,2)</text>
+      <text x="1532" y="536" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(12,2)</text>
       <text x="1236" y="552" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">gross_profit</text>
-      <text x="1532" y="552" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(12,2)</text>
+      <text x="1532" y="552" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(12,2)</text>
       <text x="1236" y="568" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">status</text>
       <text x="1532" y="568" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
       <text x="1236" y="584" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">issue_date</text>
-      <text x="1532" y="584" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME</text>
+      <text x="1532" y="584" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">TIMESTAMPTZ</text>
       <rect x="1224" y="640" width="320" height="136" rx="6" fill="#f5f5f5"/>
       <rect x="1224" y="640" width="320" height="136" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 1224,668 V 646 Q 1224,640 1230,640 H 1538 Q 1544,640 1544,646 V 668 Z" fill="rgba(45,49,66,0.05)"/>
@@ -469,9 +469,9 @@
       <text x="1236" y="712" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">method</text>
       <text x="1532" y="712" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
       <text x="1236" y="728" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">amount</text>
-      <text x="1532" y="728" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(12,2)</text>
+      <text x="1532" y="728" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(12,2)</text>
       <text x="1236" y="744" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">paid_at</text>
-      <text x="1532" y="744" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME</text>
+      <text x="1532" y="744" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">TIMESTAMPTZ</text>
       <text x="1236" y="760" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">received_by</text>
       <text x="1532" y="760" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK</text>
       <rect x="1224" y="816" width="320" height="152" rx="6" fill="#f5f5f5"/>
@@ -490,9 +490,9 @@
       <text x="1236" y="920" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">method</text>
       <text x="1532" y="920" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
       <text x="1236" y="936" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">amount</text>
-      <text x="1532" y="936" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(12,2)</text>
+      <text x="1532" y="936" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(12,2)</text>
       <text x="1236" y="952" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">paid_at</text>
-      <text x="1532" y="952" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME</text>
+      <text x="1532" y="952" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">TIMESTAMPTZ</text>
       <rect x="1608" y="96" width="320" height="104" rx="6" fill="#f5f5f5"/>
       <rect x="1608" y="96" width="320" height="104" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 1608,124 V 102 Q 1608,96 1614,96 H 1922 Q 1928,96 1928,102 V 124 Z" fill="rgba(45,49,66,0.05)"/>
@@ -533,11 +533,11 @@
       <text x="1620" y="472" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">product_id</text>
       <text x="1916" y="472" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK</text>
       <text x="1620" y="488" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">qty</text>
-      <text x="1916" y="488" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1916" y="488" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <text x="1620" y="504" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">received_qty</text>
-      <text x="1916" y="504" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1916" y="504" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <text x="1620" y="520" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">cost_price</text>
-      <text x="1916" y="520" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1916" y="520" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <rect x="1608" y="576" width="320" height="168" rx="6" fill="#f5f5f5"/>
       <rect x="1608" y="576" width="320" height="168" rx="6" fill="rgba(235,108,54,0.06)" stroke="#eb6c36" stroke-width="1"/>
       <path d="M 1608,604 V 582 Q 1608,576 1614,576 H 1922 Q 1928,576 1928,582 V 604 Z" fill="rgba(235,108,54,0.14)"/>
@@ -552,13 +552,13 @@
       <text x="1620" y="664" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">supplier_id</text>
       <text x="1916" y="664" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK NULL</text>
       <text x="1620" y="680" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">receive_date</text>
-      <text x="1916" y="680" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME</text>
+      <text x="1916" y="680" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">TIMESTAMPTZ</text>
       <text x="1620" y="696" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">unit_cost</text>
-      <text x="1916" y="696" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1916" y="696" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <text x="1620" y="712" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">initial_qty</text>
-      <text x="1916" y="712" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1916" y="712" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <text x="1620" y="728" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">remaining_qty</text>
-      <text x="1916" y="728" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1916" y="728" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <rect x="1608" y="784" width="320" height="184" rx="6" fill="#f5f5f5"/>
       <rect x="1608" y="784" width="320" height="184" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
       <path d="M 1608,812 V 790 Q 1608,784 1614,784 H 1922 Q 1928,784 1928,790 V 812 Z" fill="rgba(45,49,66,0.05)"/>
@@ -573,13 +573,13 @@
       <text x="1620" y="872" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">job_id</text>
       <text x="1916" y="872" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK NULL</text>
       <text x="1620" y="888" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">qty</text>
-      <text x="1916" y="888" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DECIMAL(10,2)</text>
+      <text x="1916" y="888" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">NUMERIC(10,2)</text>
       <text x="1620" y="904" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">type</text>
       <text x="1916" y="904" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">ENUM</text>
       <text x="1620" y="920" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">note</text>
       <text x="1916" y="920" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">VARCHAR(255) · NULL</text>
       <text x="1620" y="936" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">created_at</text>
-      <text x="1916" y="936" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">DATETIME</text>
+      <text x="1916" y="936" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">TIMESTAMPTZ</text>
       <text x="1620" y="952" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">created_by</text>
       <text x="1916" y="952" fill="#7a8399" font-size="9" font-family="'Geist Mono', monospace" text-anchor="end">INT · FK</text>
 
@@ -612,14 +612,15 @@
         </ul>
       </div>
       <div class="card">
-        <p class="eyebrow">กฎที่ต้องบังคับตอนเขียนโค้ด</p>
+        <p class="eyebrow">กฎสำคัญของระบบ</p>
         <div class="card-header"><span class="card-dot ink"></span><h3>ข้อจำกัดสำคัญ</h3></div>
         <ul>
-          <li>รถหนึ่งคันมีใบงานที่ยังไม่ปิดได้ครั้งละหนึ่งใบ</li>
+          <li>รถหนึ่งคันมีใบงานที่ยังไม่ปิดได้ครั้งละหนึ่งใบ บังคับด้วย partial unique index ของ PostgreSQL</li>
           <li>อะไหล่ที่ตัดข้ามหลาย Lot ต้องแตกเป็นหลายแถวใน <code>Job_Items</code> เพราะแต่ละ Lot ต้นทุนไม่เท่ากัน</li>
           <li>ส่วนลดต้องปันเข้า <code>discount_parts</code> และ <code>discount_labor</code> เพราะสองหมวดคิดภาษีคนละแบบ</li>
           <li>อัตราภาษีคัดลอกจาก <code>Shop_Settings</code> มาเก็บไว้ที่บิลตอนออก บิลเก่าจึงไม่เปลี่ยนตามภายหลัง</li>
-          <li>ผลรวม <code>labor_share</code> ในหนึ่งใบงานต้องเท่ากับ 100 และมี <code>is_lead</code> แค่คนเดียว</li>
+          <li>ใบงานหนึ่งใบใส่ช่างได้หลายคนผ่าน <code>Job_Mechanics</code> แต่ <code>is_lead</code> มีได้คนเดียว บังคับด้วย partial unique index เช่นกัน</li>
+          <li><code>labor_share</code> ว่างได้ ว่างคือหารค่าแรงเท่ากันตามจำนวนช่าง ถ้าเลือกกรอกเองต้องกรอกครบทุกแถวและผลรวมเท่ากับ 100</li>
         </ul>
       </div>
       <div class="card">
